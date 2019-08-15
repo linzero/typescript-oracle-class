@@ -25,4 +25,4 @@ You can use a try catch to get errors in the query or the connection.
 
 Class made and tested by:
 
-* **David Parra** - *Trabajo Inicial* - [villanuevand](https://github.com/linzero)
+* **David Parra** - *Trabajo Inicial* - [linzero](https://github.com/linzero)
