@@ -24,12 +24,11 @@ export default class OracleDB {
             stmtCacheSize:  30
         };
 
-        this.createPool();
     }
 
     static async execQuery( query: string, parameters:oracledb.DBObject, autoCommit:Boolean = false ){
         
-        const connection:any = await this.instance.pool.getConnection();
+        const connection:any = await this._instance.pool.getConnection();
 
         let result = await connection.execute(query, parameters, {
             autoCommit: autoCommit
@@ -56,8 +55,14 @@ export default class OracleDB {
     }
 
 
-    public static get instance(){
-        return this._instance || ( this._instance = new this() );
+    public static async instance(){
+        if(this._instance) {
+            return this._instance
+        }
+
+        this._instance = new this()
+        await this._instance.createPool()
+        return this._instance
     }
 
     private async createPool() {
